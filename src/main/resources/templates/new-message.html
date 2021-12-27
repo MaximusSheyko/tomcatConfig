@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" id="bootstrap-css">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <title>new-message</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/send}" th:object="${message}">
+    <div class="text-xl-center">
+        <label>Recipient:</label>
+        <br>
+        <h3  th:text="${recipient.login}"></h3>
+        <br>
+        <label>Sender:</label>
+        <br>
+        <h3  th:text="${sender.login}"></h3>
+        <br>
+        <label>Message:</label>
+        <br>
+        <label>
+            <input type="text" th:field="${message.message}" class="form-control" placeholder="Enter message"/>
+        </label>
+        <br>
+        <input class="btn-black" type="submit" value="Send">
+    </div>
+</form>
+
+</body>
+</html>

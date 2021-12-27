@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/registration.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" id="bootstrap-css">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container register-form">
+    <div class="form">
+        <div class="note">
+            <p>User registration page</p>
+        </div>
+        <form class="form-content" th:method="POST" th:action="@{/registration}" th:object="${user}">
+            <div class="alert-danger text-center" role="alert" th:if="${error}" th:text="${error}"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input type="text" th:field="*{login}" id="login" class="form-control" placeholder="Your login *" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" th:field="*{email}" id="email" class="form-control" placeholder="Your email *" required/>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Your Password *" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="repassword">Repeat password</label>
+                        <input type="password" th:field="*{confirmPassword}" class="form-control" id="repassword" placeholder="Confirm Password *" required/>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-black">Sign up</button>
+            <a type="submit" class="btn btn-secondary" th:href="@{/login}">Back</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

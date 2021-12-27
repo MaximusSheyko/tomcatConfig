@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/registration.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" id="bootstrap-css">
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/home_style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <form class="nav-item active">
+            <a class="nav-link active" href="#" id="block-option-user">Block</a>
+        </form>
+        <form class="nav-item active">
+            <a class="nav-link active" href="#"  id="unblock-option-user">Unblock</a>
+        </form>
+        <form  class="nav-item active">
+            <a class="nav-link" href="#" id="delete-option-user">Delete</a>
+        </form>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/logout}" >Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/cabinet}" id="user-message">Message</a>
+        </li>
+        <p class="alert-info s" role="alert" text="You have new messages"></p>
+    </ul>
+</nav>
+<div class="content">
+
+    <div class="container">
+        <div class="table-responsive">
+            <table id="users_form"  class="table">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <label class="control control--checkbox">
+                            <input type="checkbox" id="select-all" value="1"/>
+                            <div class="control__indicator"></div>
+                        </label>
+                    </th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Login</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data Registration</th>
+                    <th scope="col">Last Activity</th>
+                    <th scope="col">Blocking status</th>
+                </tr>
+                </thead>
+                <form id="formMain" th:method="POST" th:action="@{/panel}" th:each="person : ${users}">
+                    <tr>
+                        <th scope="row">
+                                <input type="checkbox" th:value="${person.id}"/>
+                        </th>
+                        <td th:text="${person.id}"></td>
+                        <td th:text="${person.login}"></td>
+                        <td th:text="${person.email}"></td>
+                        <td th:text="${person.dateRegistration}"> </td>
+                        <td th:text="${person.dateLastActivity}"> </td>
+                        <td th:text="${person.isEnabled}"></td>
+                        <td><input type="submit" class="btn btn-black" value="Delete"  th:formaction="'/panel/delete/'+${person.id}"/></td>
+                        <td><a  class="btn btn-black" th:href="'/panel/'+${person.id}+'/new-message'">Send message</a></td>
+                        <input type="submit"  th:formaction="'/panel/block/'+${person.id}" hidden="hidden"/>
+                        <input type="submit"  th:formaction="'/panel/unblock/'+${person.id}" hidden="hidden"/>
+                     </tr>
+
+                </form>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/users_table.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</html>
